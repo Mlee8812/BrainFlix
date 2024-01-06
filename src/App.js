@@ -1,15 +1,15 @@
 import React from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./Home";
-import Header from "./components/Header/header";
-import Upload from "./components/Upload/Upload";
+import Header from "./Components/Header/header";
+import Upload from "./Components/Upload/Upload";
 
 class App extends React.Component {
   render() {
     return (
         <BrowserRouter>
           <Header />
-          <Switch>
+          <Routes>
             <Route path="/" exact component={Home} />
             <Route
                 path="/video/:id"
@@ -18,7 +18,7 @@ class App extends React.Component {
                 }}
             />
             <Route path="/upload" component={Upload} />
-          </Switch>
+          </Routes>
         </BrowserRouter>
     );
   }

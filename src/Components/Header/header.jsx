@@ -1,9 +1,9 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import Logo from '../../assets/logo/Logo-brainflix.svg';
-import Magnifier from '../../assets/icons/Icon-search.svg';
-import Upload from '../../assets/icons/Icon-upload.svg';
-import Mohan from '../../assets/images/Mohan-muruge.jpg';
+import Logo from '../../Assets/Logo/BrainFlix-logo.svg';
+import Magnifier from '../../Assets/Icons/search.svg';
+import Upload from '../../Assets/Icons/upload.svg';
+import Mohan from '../../Assets/Images/Mohan-muruge.jpg';
 
 import '../Header/header.scss';
 
