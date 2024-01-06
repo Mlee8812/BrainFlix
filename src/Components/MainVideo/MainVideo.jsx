@@ -1,16 +1,19 @@
 import React from 'react';
 import './MainVideo.scss';
 
-const MainVideo = ({CurrentVideo}) => {
-    return (
-        <div className="video">
-            <div className="video__container">
-                <video className="video__hero" controls poster={CurrentVideo.image}></video>
+const MainVideo = ({mainVideo}) => {
+    return mainVideo.map((obj) => {
+
+        return (
+            <div className="video">
+                <div className="video__container">
+                    <video className="video__hero" controls poster={obj.image}></video>
+                </div>
             </div>
-        </div>
-    )
+        )
+    })
 }
 
 
 
-export default MainVideo
+export default MainVideo;
