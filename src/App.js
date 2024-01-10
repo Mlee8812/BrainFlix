@@ -10,14 +10,14 @@ class App extends React.Component {
             <BrowserRouter>
                 <Header />
                 <Routes>
-                    <Route path="/" exact component={Home} />
+                    <Route path="/" element={<Home />} />
                     <Route
                         path="/video/:id"
                         render={(props) => {
                             return <Home {...props} />;
                         }}
                     />
-                    <Route path="/upload" component={Upload} />
+                    <Route path="/upload" element={<Upload />} />
                 </Routes>
             </BrowserRouter>
         );

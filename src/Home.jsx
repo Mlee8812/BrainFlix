@@ -2,7 +2,7 @@ import React from "react";
 import "./Home.scss";
 import axios from "axios";
 
-//Compenents
+
 import CommentForm from "./Components/CommentForm/CommentForm";
 import MainVideo from "./Components/MainVideo/MainVideo";
 import VideoBuilder from "./Components/VideoBuilder/VideoBuilder";
@@ -54,7 +54,7 @@ class Home extends React.Component {
     componentDidUpdate(prevProps) {
         console.log(prevProps);
         console.log(this.props.match);
-        if (prevProps.match && prevProps.match.params && this.props.match && this.props.match.params && prevProps.match.params.id !== this.props.match.params.id) {
+        if (prevProps.match.params.id !== this.props.match.params.id) {
             axios
                 .get(
                     `https://project-2-api.herokuapp.com/videos/${this.props.match.params.id}?api_key=${apiKey}`
