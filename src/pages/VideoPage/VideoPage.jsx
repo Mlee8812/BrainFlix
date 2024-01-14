@@ -6,6 +6,7 @@ import NextVideos from "../../Components/sections/NextVideos/NextVideos";
 
 import { useParams } from "react-router-dom";
 
+const REACT_APP_BRAINFLIX_API_KEY = process.env.REACT_APP_BRAINFLIX_API_KEY;
 function VideoPage({
                        videoExpandedDetails,
                        videos,
