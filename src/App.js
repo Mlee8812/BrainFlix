@@ -10,7 +10,7 @@ import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 function App() {
     // ** STATES ** //
     const [defaultVideo, setDefaultVideo] = useState(
-        "43d92d7e-20e5-42a7-8869-b0d83db0ce18"
+        "84e96018-4022-434e-80bf-000ce4cd12b8"
     );
     const [currentVideoId, setCurrentVideoId] = useState(defaultVideo); // takes an id
 
