@@ -3,8 +3,8 @@ import { Component } from 'react';
 import axios from 'axios';
 import './VideoUploadPage.scss';
 import Button from '../../components/Button/Button';
-import publish from '../../assets/images/publish.svg';
-import upload_video_preview from '../../assets/images/upload_video_preview.jpg';
+import publish from '../../Assets/Icons/publish.svg';
+import upload_video_preview from '../../Assets/Images/Upload-video-preview.jpg';
 const API_URL = process.env.REACT_APP_API_URL;
 
 

@@ -1,7 +1,7 @@
 import './App.scss';
 import { Component } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Header from './components/Header/Header';
+import { BrowserRouter, Route, Routes} from 'react-router-dom';
+import Header from './Components/Header/Header';
 import HomePage from './pages/HomePage/HomePage';
 import VideoUploadPage from './pages/VideoUploadPage/VideoUploadPage';
 
@@ -15,11 +15,11 @@ class App extends Component {
         return (
             <BrowserRouter>
                 <Header />
-                <Switch>
+                <Routes>
                     <Route path="/" exact component={HomePage} />
                     <Route path="/video-player/:videoId" component={HomePage} />
                     <Route path="/video-upload" component={VideoUploadPage} />
-                </Switch>
+                </Routes>
             </BrowserRouter>
         )
     }

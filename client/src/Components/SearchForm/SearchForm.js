@@ -1,5 +1,5 @@
 import './SearchForm.scss';
-import search from '../../assets/images/search.svg';
+import search from '../../Assets/Icons/search.svg';
 
 
 const SearchForm = ({ submitHandler }) => {

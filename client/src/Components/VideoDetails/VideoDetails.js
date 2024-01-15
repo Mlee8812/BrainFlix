@@ -1,9 +1,9 @@
 import './VideoDetails.scss';
 import CommentBox from '../CommentBox/CommentBox';
 import ExistCommentBox from '../ExistCommentBox/ExistCommentBox';
-import formatTimestamp from '../../utils/formatDate';
-import viewsIcon from '../../assets/images/views.svg';
-import likesIcon from '../../assets/images/likes.svg';
+import formatTimestamp from '../../utilities/formatData';
+import viewsIcon from '../../Assets/Icons/views.svg';
+import likesIcon from '../../Assets/Icons/likes.svg';
 
 const VideoDetails = ({ selectedVideo, fetchVideoDetails }) => {
 
