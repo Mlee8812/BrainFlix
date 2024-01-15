@@ -1,0 +1,54 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/typography" as *;
+@use "../../styles/partials/variables" as *;
+
+.search {
+  @include flex(flex-start, center, row, nowrap);
+  width: 95%;
+  margin-bottom: 1rem;
+  position: relative;
+  @include tablet {
+    margin-bottom: 0rem;
+    width: 50%;
+    max-width: 15rem;
+    min-width: 15rem;
+    margin-right: 1.5rem;
+  }
+
+  &__button {
+    position: absolute;
+    left: 8px;
+    background: transparent;
+    padding: 0rem;
+    border: none;
+    outline: none;
+  }
+
+  &__icon-search {
+    width: 1rem;
+    height: 1rem;
+    object-fit: cover;
+  }
+
+  &__input {
+    background-color: $bg-color-form-field;
+    outline: none;
+    width: 90%;
+    padding:0.625rem 0.75rem 0.625rem 2rem;
+    object-fit: cover;
+    box-shadow: 0 0 0px 1000px $bg-color-form-field inset;
+    @include styleInputMobile;
+    @include tablet {
+      @include styleInputTablet;
+      width: 100%;
+    }
+
+    &::placeholder {
+      @include font-placeholder-text;
+    }
+
+    &[type = "search"] {
+      @include font-placeholder-text;
+    }
+  }
+}

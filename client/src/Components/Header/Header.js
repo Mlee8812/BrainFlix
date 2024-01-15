@@ -1,38 +1,26 @@
-import React from "react";
-import { Link } from "react-router-dom"
-import logo from "../../Assets/Logo/BrainFlix-logo.svg";
-import profilePicture from "../../Assets/Images/Mohan-muruge.jpg";
-import "./Header.scss";
+import './Header.scss';
+import Logo from '../Logo/Logo';
+import SearchForm from '../SearchForm/SearchForm';
+import NavButton from '../NavButton/NavButton';
+import Avatar from '../Avatar/Avatar';
+import upload from '../../assets/images/upload.svg';
 
-const Header = () => (
-    <header className="header">
-        <Brand/>
-        <Search/>
-        <div className="header__upload">
-            <UploadButton/>
-            <ProfilePicture/>
-        </div>
-    </header>
-);
+const Header = () => {
+    const submitHandler = (e) => {
+        e.preventDefault()
+        e.target.reset()
+    };
 
-const Brand = () => (
-    <div className="header__image">
-        <Link to="/"><img src={logo} alt="Brand-Logo" className="header__logo" /></Link>
-    </div>
-);
-
-const Search = () => (
-    <form className="header__form">
-        <input type="search" placeholder="Search" className="header__search"></input>
-    </form>
-);
-
-const UploadButton = () => (
-    <Link to="/upload" className="header__link"><button className="header__button button">+ UPLOAD</button></Link>
-)
-
-const ProfilePicture = () => (
-    <img src={profilePicture} alt="Profile" className="header__profile-picture" />
-)
+    return (
+        <header className='header'>
+            <Logo path="/" />
+            <div className='header__container-forms'>
+                <SearchForm submitHandler={submitHandler} />
+                <NavButton icon={upload} title='UPLOAD' path="/video-upload" />
+                <Avatar className='avatar' />
+            </div>
+        </header>
+    );
+};
 
 export default Header;

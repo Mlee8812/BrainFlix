@@ -1,18 +1,15 @@
-// Breakpoints
+// Primary colors
+$text-color: #323232; /* text color*/
+$button-color: #0095FF; /* Primary CTA color. Active form field outline color.*/
+$secondary-text-color: #AFAFAF;/* Secondary text color. Text Label color*/
+$bg-color: #FFFFFF;/* Background color. CTA text color.*/
 
-$mobile: 320px;
-$tablet: 768px;
-$desktop: 1200px;
+// Secondary colors
+$bg-video-color: #000000; /*  Video player components.*/
+$hover-color: #0065AD; /*  CTA hover state color.*/
+$line-divider-color: #E1E1E1; /* Divider line. Form field outline color.*/
+$bg-color-form-field: #FAFAFA; /*Form field background color.*/
 
-// Colors
-
-$black: #323232;
-$complete-black: #000000;
-$white: #FFFFFF;
-$mercury: #E1E1E1;
-$alabaster: #FAFAFA;
-$silver: #AFAFAF;
-$red: #D63447;
-
-$brainflix-blue: #0095FF;
-$brainflix-dark-blue: #0065AD;
+// screen size
+$desktop-breakpoint: 80rem;    // 1280px
+$tablet-breakpoint: 48rem;     // 768px
