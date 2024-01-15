@@ -1,19 +1,28 @@
 const express = require('express');
-const app = express();
 const cors = require('cors');
-const bodyParser = require('body-parser');
-const videosRoutes = require("./videos");
+const videoRouter = require('./routes/videos');
 
 require('dotenv').config();
 
-const port = process.env.PORT || 8080;
+const app = express();
+const PORT = process.env.PORT || 5050;
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+// CORS middleware
+app.use(cors({
+    origin: process.env.CLIENT_URL
+}));
 
-app.use(cors());
+// middleware for parsing video.json
+
 app.use(express.json());
 
-app.use('/videos', videosRoutes);
+// static middleware
+app.use(express.static('public'));
 
-app.listen(port, () => console.log(`Server running on ${port}`));
+// router middleware
+app.use('/videos', videoRouter);
+
+// port
+app.listen(PORT, () => {
+    console.log(`🚀 Server listening on ${PORT}`)
+})

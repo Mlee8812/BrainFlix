@@ -1,117 +1,93 @@
-@import "./typography";
-
-@mixin mobile {
-  @media screen and (min-width: $mobile) {
-    @content;
-  }
-}
+@use "./variables" as *;
 
 @mixin tablet {
-  @media screen and (min-width: $tablet) {
+  @media screen and (min-width: $tablet-breakpoint) {
     @content;
   }
 }
 
 @mixin desktop {
-  @media screen and (min-width: $desktop) {
+  @media screen and (min-width: $desktop-breakpoint) {
     @content;
   }
 }
 
-@mixin button {
-  font-family: "Avenir Bold";
-  background-color: $brainflix-blue;
+@mixin flex($justify-content: flex-start, $align-items: stretch, $flex-direction: row, $flex-wrap: nowrap){
+  display:flex;
+  justify-content: $justify-content;
+  align-items: $align-items;
+  flex-direction: $flex-direction;
+  flex-wrap: $flex-wrap;
+}
+
+@mixin styleInputMobile{
+  border-radius: 4px;
+  border: 1px solid $line-divider-color;
+  min-height: 2.25rem;
+}
+@mixin styleInputTablet{
+  border-radius: 4px;
+  border: 1px solid $line-divider-color;
+  min-height: 2.5rem;
+  max-height: 2.5rem;
+}
+
+@mixin buttonStyle {
+  min-height: 2.5rem;
+  max-height: 2.5rem;
+  background-color: $button-color;
   border: none;
-  border-radius: 5px;
-  color: $white;
-  height: 100%;
-  cursor: pointer;
-  transition: 1s;
-
-  &:hover {
-    background-color: $brainflix-dark-blue;
-  }
-
-  @include tablet {
-    font-size: 1rem;
-  }
+  border-radius: 4px;
 }
 
-@mixin button-reverse {
-  font-family: "Avenir Bold";
-  background-color: $white;
+@mixin buttonStyleTablet {
+  height: 2.5rem;
+  max-width:9.375rem;
+  background-color: $button-color;
   border: none;
-  border-radius: 5px;
-  color: $brainflix-blue;
-  height: 100%;
-  cursor: pointer;
-  transition: 1s;
+  border-radius: 4px;
 
-  &:hover {
-    background-color: $mercury;
-    color: $brainflix-dark-blue;
-  }
-
-  @include tablet {
-    font-size: 1rem;
-  }
 }
 
-@mixin textinput {
-  font-family: "Avenir Regular";
-  background-color: $alabaster;
-  border: 1px solid $mercury;
-  border-radius: 3px;
-  width: 100%;
-  line-height: 2em;
-  padding-left: 10px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  box-sizing: border-box;
-}
-
-@mixin divider {
+@mixin HeaderButtonStyleTablet {
+  height: 2.5rem;
+  max-width:12rem;
+  background-color: $button-color;
   border: none;
-  background-color: $mercury;
-  height: 1px;
-
-  @include desktop {
-    width: 100%;
+  border-radius: 4px;
+  @include desktop{
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
 
-@mixin heading-1 {
-  font-family: "Avenir Bold";
-  font-size: 1.8rem;
-  line-height: 32px;
+@mixin dividerStyleBottom {
+  border-bottom: 1px solid $line-divider-color;
+}
+@mixin dividerStyleBottomNone {
+  border-bottom: none;
 }
 
-@mixin heading-2 {
-  font-family: "Avenir Demi Bold";
-  font-size: 1.2rem;
-  line-height: 22px;
+@mixin dividerStyleTop {
+  border-top: 1px solid $line-divider-color;
 }
 
-@mixin heading-3 {
-  font-family: "Avenir Demi Bold";
-  font-size: 1.1rem;
-  line-height: 18px;
+@mixin dividerStyleRight {
+  border-right: 1px solid $line-divider-color;
 }
 
-@mixin heading-4 {
-  font-family: "Avenir Regular";
-  font-size: 1.1rem;
-  line-height: 18px;
+@mixin dividerStyleLeft {
+  border-left: 1px solid $line-divider-color;
 }
 
-@mixin heading-5 {
-  font-family: "Avenir Regular";
-  font-size: 0.9rem;
-  line-height: 20px;
+@mixin borderStyle {
+  border: none;
+  border-radius: 4px;
 }
 
-@mixin paragraph {
-  font-family: "Avenir Regular";
-  font-size: 1rem;
-  color: $black;
+@mixin formStyle {
+  background-color: $bg-color-form-field;
+  outline: none;
+  padding: 0.75rem;
 }
