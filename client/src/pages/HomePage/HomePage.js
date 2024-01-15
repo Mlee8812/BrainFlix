@@ -1,9 +1,9 @@
 import './HomePage.scss';
 import React, { Component } from 'react';
 import axios from 'axios';
-import VideoMainSection from '../../components/VideoMainSection/VideoMainSection';
-import VideoDetails from '../../components/VideoDetails/VideoDetails';
-import VideoList from '../../components/VideoList/VideoList';
+import VideoMainSection from '../../Components/VideoMainSection/VideoMainSection';
+import VideoDetails from '../../Components/VideoDetails/VideoDetails';
+import VideoList from '../../Components/VideoList/VideoList';
 
 // env variable = REACT_APP_API_URL
 const API_URL = process.env.REACT_APP_API_URL;

@@ -1,5 +1,5 @@
 import './VideoMainSection.scss';
-import formatVideoImage from '../../utils/formatVideoImage';
+import formatVideoImage from '../../utilities/formatVideoImage';
 
 const VideoMainSection = ({ selectedVideo }) => {
     const { image } = selectedVideo;

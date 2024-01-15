@@ -3,7 +3,7 @@ import Logo from '../Logo/Logo';
 import SearchForm from '../SearchForm/SearchForm';
 import NavButton from '../NavButton/NavButton';
 import Avatar from '../Avatar/Avatar';
-import upload from '../../assets/images/upload.svg';
+import upload from '../../Assets/Icons/upload.svg';
 
 const Header = () => {
     const submitHandler = (e) => {

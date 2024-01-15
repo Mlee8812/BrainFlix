@@ -1,5 +1,5 @@
 import './ExistCommentBox.scss';
-import formatTimestamp from '../../utils/formatDate';
+import formatTimestamp from '../../utilities/formatData';
 
 const ExistCommentBox = ({ comments }) => {
 

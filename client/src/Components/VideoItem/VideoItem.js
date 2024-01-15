@@ -1,6 +1,6 @@
 import './VideoItem.scss';
 import { NavLink } from 'react-router-dom';
-import formatVideoImage from '../../utils/formatVideoImage';
+import formatVideoImage from '../../utilities/formatVideoImage';
 
 
 const VideoItem = ({ title, image, channel, id }) => {

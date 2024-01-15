@@ -2,7 +2,7 @@ import './CommentBox.scss';
 import axios from 'axios';
 import Avatar from '../Avatar/Avatar';
 import Button from '../Button/Button';
-import add_comment from '../../assets/images/add_comment.svg';
+import add_comment from '../../Assets/Icons/add_comment.svg';
 const API_URL = process.env.REACT_APP_API_URL;
 
 const CommentBox = (props) => {
