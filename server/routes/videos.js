@@ -1,97 +1,92 @@
-const express = require('express');
-const fs = require('fs');
-const { v4: uuid } = require('uuid');
-const videoRouter = express.Router();
+const express = require("express");
+const router = express.Router();
 
-// function for reading data in videos.json
-const readFile = () => {
-    const videosData = fs.readFileSync('./data/videos.json');
-    return JSON.parse(videosData);
-}
+const path = require("node:path");
 
-// function for writing data in videos.json
-const writeFile = (videosData) => {
-    fs.writeFileSync('./data/videos.json', JSON.stringify(videosData, null, 2));
-}
+const videosJSONFile = path.join(__dirname, "../data/videos.json");
+const videos = require(videosJSONFile);
 
-const PORT = process.env.PORT || 5050;
+// Unique ID creator
+const { getNewId, writeJSONFile } = require("../helper/helper");
 
-// get request for videoList
-videoRouter.get('/', (_req, res) => {
-    let videosData = readFile();
-    videosData = videosData.map(video => {
-        return {
-            id: video.id,
-            title: video.title,
-            channel: video.channel,
-            image: video.image,
+/**
+ * END POINTS FOR VIDEOS
+ *
+ * GET /videos
+ * GET /videos/:id
+ * POST /videos
+ */
+
+// Map and replace proper image urls
+const videosWithUpdatedImages = videos.map((video) => {
+    return { ...video, image: `http://localhost:8080/${video.image}` };
+});
+
+// GET /videos route that responds with an array of videos
+router.get("/", (_req, res) => {
+    // return all videos
+    try {
+        res.status(200).json(videosWithUpdatedImages);
+    } catch (error) {
+        console.log("Error retrieving the videos", error);
+    }
+});
+
+// GET /videos/:id that respond with an object containing the details
+router.get("/:id", (req, res) => {
+    // return all videos
+    try {
+        const found = videos.find((video) => video.id === req.params.id);
+        if (found) {
+            const updatedLink = {
+                ...found,
+                // image: `http://localhost:8080/${image}`,
+                image: `http://localhost:8080/${found.image}`,
+            };
+            res.status(200).json(updatedLink);
+        } else {
+            res
+                .status(404)
+                .json({ error: `Student with ID ${req.params.id} not found` });
         }
-    })
-    res.status(200).send(videosData)
-})
-
-// get request with videoId for videoDetails
-videoRouter.get('/:videoId', (req, res) => {
-    const videoId = req.params.videoId;
-    let videosData = readFile();
-    const video = videosData.find(video => video.id === videoId);
-
-    if (!video) {
-        return res.status(404).send("Video not found");
+    } catch (error) {
+        console.log("Error retrieving the videos", error);
     }
-    return res.status(200).json(video);
 });
 
-// post request for adding comments
-videoRouter.post("/:videoId/comments", (req, res) => {
-    const { comment } = req.body;
-    let videoId = req.params.videoId;
-    const videosData = readFile();
-    let selectedVideo = videosData.find(video => video.id === videoId);
+// POST /videos that will add a new video to the video list. Unique ID must be generated
+router.post("/", (req, res) => {
+    console.log(req.body);
+    const { title, channel } = req.body;
+    if (!title || !channel) {
+        // bad request - need title and channel
+        return res.status(400).json({
+            error:
+                "Please provide video title and channel for uploading a new video.",
+        });
+    }
 
-    const newComment = {
-        name: 'Veranika Karpava',
-        comment: comment,
-        id: uuid(),
+    const newVideo = {
+        // or use spread to duplicate
+        id: getNewId(),
+        title,
+        channel,
+        image: "/images/Upload-video-preview.jpg", // all uses the same image
+        // description, // lorem ipsum
+        views: 0,
         likes: 0,
-        timestamp: Date.now()
+        duration: "2:00", // make a function that generates a random time between 1 and 10 minutes
+        video: "https://project-2-api.herokuapp.com/stream",
+        timestamp: new Date().getTime(),
+        comments: [],
     };
 
-    selectedVideo.comments.unshift(newComment)
-    writeFile(videosData)
-    return res.status(200).send(videosData);
-})
+    // update json videos file with the new video
+    videos.push(newVideo);
+    writeJSONFile(videosJSONFile, videos);
 
-
-// post request for upload form
-videoRouter.post('/', (req, res) => {
-    const { title, description } = req.body;
-    if (!title || !description) {
-        return res.status(400).send('Please make sure to include title and description of the video');
-    }
-
-    const uploadVideo = {
-        id: uuid(),
-        title: title,
-        channel: 'John Smith',
-        image: '/images/upload_video_preview.jpg',
-        description: description,
-        views: 45,
-        likes: 38,
-        duration: "03:06",
-        timestamp: Date.now(),
-        comments: [{
-            "name": "Michael Lee",
-            "comment": "They BLEW the ROOF off at their last event, once everyone started figuring out they were going. This is still simply the greatest opening of an event I have EVER witnessed.",
-            "likes": 0,
-            "timestamp": Date.now()
-        }]
-    };
-
-    const videosData = readFile();
-    videosData.push(uploadVideo);
-    writeFile(videosData);
-    return res.status(201).json(uploadVideo);
+    // respond to the client with new video and status code 201
+    res.status(201).json(newVideo);
 });
 
-module.exports = videoRouter;
+module.exports = router;
