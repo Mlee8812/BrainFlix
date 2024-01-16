@@ -1,28 +1,76 @@
-import './App.scss';
-import { Component } from 'react';
-import { BrowserRouter, Route, Routes} from 'react-router-dom';
-import Header from './Components/Header/Header';
-import HomePage from './pages/HomePage/HomePage';
-import VideoUploadPage from './pages/VideoUploadPage/VideoUploadPage';
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import VideoPage from "./pages/VideoPage/VideoPage";
+import UploadPage from "./pages/UploadPage/UploadPage";
+import Header from "./Components/sections/Header/Header";
+import { useEffect, useState } from "react";
+import { getVideos } from "./utilities/utilities";
+import axios from "axios";
+import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 
-// env variable = REACT_APP_API_URL
-console.log('API_URL', process.env.REACT_APP_API_URL);
+function App() {
+    // ** STATES ** //
+    const [defaultVideo, setDefaultVideo] = useState(
+        "84e96018-4022-434e-80bf-000ce4cd12b8"
+    );
+    const [currentVideoId, setCurrentVideoId] = useState(defaultVideo); // takes an id
 
-class App extends Component {
+    // This is for the side panel
+    const [videos, setVideos] = useState();
 
-    render() {
+    //Video Details expanded are for a single video page
+    // find the video with the id == to current video id, then set those details down
+    const [videoExpandedDetails, setVideoExpandedDetails] = useState();
 
-        return (
-            <BrowserRouter>
-                <Header />
-                <Routes>
-                    <Route path="/" exact component={HomePage} />
-                    <Route path="/video-player/:videoId" component={HomePage} />
-                    <Route path="/video-upload" component={VideoUploadPage} />
-                </Routes>
-            </BrowserRouter>
-        )
-    }
+    // **** FETCH USE EFFECT **** ///
+    const SEARCH_URL = `http://localhost:8080/api`;
+    const searchByVideoId = (videoId) => `${SEARCH_URL}/videos/${videoId}`;
+    const searchVideosAll = `${SEARCH_URL}/videos`;
+
+    // * Fetch Total Video Data * //
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const { data: videos } = await axios.get(searchVideosAll);
+                const { data: videodetails } = await axios.get(
+                    searchByVideoId(currentVideoId)
+                );
+
+
+                const filteredVideos = getVideos(currentVideoId, videos);
+                setVideos(filteredVideos); // this sets the video list as all videos
+                setVideoExpandedDetails(videodetails);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        fetchData();
+    }, [currentVideoId]);
+
+    const handleVideoChange = (videoId) => {
+        setCurrentVideoId(videoId);
+    };
+
+    return (
+        <BrowserRouter>
+            <Header />
+            <Routes>
+                <Route path="/" element={<Navigate to={`/videos/${defaultVideo}`} />} />
+                <Route
+                    path="videos/:videoId"
+                    element={
+                        <VideoPage
+                            videos={videos}
+                            videoExpandedDetails={videoExpandedDetails}
+                            onVideoChange={handleVideoChange}
+                        />
+                    }
+                />
+
+                <Route path="/upload" element={<UploadPage />} />
+                <Route path="*" element={<NotFoundPage />} />
+            </Routes>
+        </BrowserRouter>
+    );
 }
 
 export default App;
