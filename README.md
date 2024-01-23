@@ -1,15 +1,4 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+# BrainFlix App
 
 Front-End Functionality:
 
@@ -26,3 +15,15 @@ Main Page:
 On the main page, the "Next Video" list intelligently excludes the currently displayed video. This is achieved through the utilization of the componentDidUpdate lifecycle method and match.params from react-router, facilitating precise updates to the main video data when necessary.
 
 ![Screenshot 2024-01-23 at 3 12 23 PM](https://github.com/Mlee8812/BrainFlix/assets/97935821/1b0214c5-234c-47d5-9b46-28ec2d7de1fa)
+
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+
+### `npm start`
+
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
